@@ -177,9 +177,11 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
           onPause={() => setPlaying(false)}
           onEnded={onEnded}
           onError={onError}
-          onTimeUpdate={(e) =>
-            setTime((t) => ({ ...t, time: e.currentTarget.currentTime }))
-          }
+          onTimeUpdate={(e) => {
+            // Lire avant setTime : currentTarget vaut null quand React exécute l'updater.
+            const now = e.currentTarget.currentTime;
+            setTime((t) => ({ ...t, time: now }));
+          }}
           onLoadedMetadata={(e) => {
             const d = e.currentTarget.duration;
             if (Number.isFinite(d)) setTime((t) => ({ ...t, duration: d }));
