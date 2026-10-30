@@ -36,6 +36,16 @@ body {
   font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
 
+/* Texture de fond fixe (un pseudo-élément, car background-attachment: fixed est ignoré sur iOS). */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--bg) url("/texture.jpg") center / cover no-repeat;
+  pointer-events: none;
+}
+
 ::selection {
   background: var(--accent);
   color: var(--accent-ink);
