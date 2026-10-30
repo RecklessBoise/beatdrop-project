@@ -20,6 +20,9 @@ function r2(): S3Client {
         accessKeyId: env.r2AccessKeyId,
         secretAccessKey: env.r2SecretAccessKey,
       },
+      // Sinon le SDK signe une somme CRC32 du corps vide et R2 rejette le vrai fichier.
+      requestChecksumCalculation: "WHEN_REQUIRED",
+      responseChecksumValidation: "WHEN_REQUIRED",
     });
   }
   return client;
