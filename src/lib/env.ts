@@ -1,7 +1,8 @@
 import "server-only";
 
 function required(name: string): string {
-  const value = process.env[name];
+  // Les valeurs collées dans Vercel traînent souvent un espace ou un retour à la ligne.
+  const value = process.env[name]?.trim();
   if (!value) {
     throw new Error(`Variable d'environnement manquante : ${name} (voir .env.example)`);
   }

@@ -5,8 +5,8 @@ import { env } from "./env";
 import { SESSION_COOKIE, verifySessionToken } from "./session";
 
 export function passwordMatches(candidate: string, expected = env.adminPassword): boolean {
-  const a = Buffer.from(candidate);
-  const b = Buffer.from(expected);
+  const a = Buffer.from(candidate.trim().normalize("NFC"));
+  const b = Buffer.from(expected.normalize("NFC"));
   if (a.length !== b.length) return false;
   return timingSafeEqual(a, b);
 }
