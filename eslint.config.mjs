@@ -12,6 +12,10 @@ const compat = new FlatCompat({
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
+    // Les pochettes sont servies par URL signée R2 : <img> simple plutôt que next/image.
+    rules: { "@next/next/no-img-element": "off" },
+  },
+  {
     ignores: [
       "node_modules/**",
       ".next/**",
